@@ -3,18 +3,17 @@ package com.blue.pdf;
 import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
-import javax.swing.text.Document;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class PdfMerge {
-
+    /**
+     * @Auther rangerhou
+     * @Date 2022/11/17
+     * @desc
+     */
     public static File mulFile2One(List<File> files, String targetPath) throws IOException {
         // pdf合并工具类
         PDFMergerUtility mergePdf = new PDFMergerUtility();
@@ -30,14 +29,19 @@ public class PdfMerge {
         mergePdf.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
         return new File(targetPath);
     }
-
+    /**
+     * @author rangerhou
+     * @date 2022/11/22
+     * @desc
+     */
     public static void merge(File folder)throws IOException{
-        File[] files = folder.listFiles((dir, name) -> name.endsWith("pdf"));
+        File[] files = folder.listFiles((dir, name) -> name.endsWith("pdf") && !name.equals("merged.pdf"));
         List<File> fileList = Arrays.asList(files);
-        mulFile2One(fileList,"d:/tmp/fapiao/merged.pdf");
+        mulFile2One(fileList,folder.getPath()+"/merged.pdf");
     }
     public static void main(String[] args) throws IOException {
-        merge(new File("d:/tmp/fapiao"));
+        String pathname = "d:/tmp/fapiao/20230109";
+        merge(new File(pathname));
 
     }
 }
