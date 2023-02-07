@@ -40,7 +40,7 @@ public class PdfMerge {
         mulFile2One(fileList,folder.getPath()+"/merged.pdf");
     }
     public static void main(String[] args) throws IOException {
-        String pathname = "d:/tmp/fapiao/20230109";
+        String pathname = "d:/tmp/fapiao/20230206";
         merge(new File(pathname));
 
     }
