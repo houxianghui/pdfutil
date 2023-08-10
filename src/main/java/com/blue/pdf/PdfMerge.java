@@ -10,11 +10,11 @@ import java.util.List;
 
 public class PdfMerge {
     /**
-     * @Auther rangerhou
-     * @Date 2022/11/17
+     * @author rangerhou
+     * @date 2022/11/17
      * @desc
      */
-    public static File mulFile2One(List<File> files, String targetPath) throws IOException {
+    public static void mulFile2One(List<File> files, String targetPath) throws IOException {
         // pdf合并工具类
         PDFMergerUtility mergePdf = new PDFMergerUtility();
         for (File f : files) {
@@ -27,7 +27,7 @@ public class PdfMerge {
         mergePdf.setDestinationFileName(targetPath);
         // 合并pdf
         mergePdf.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
-        return new File(targetPath);
+        new File(targetPath);
     }
     /**
      * @author rangerhou
@@ -36,12 +36,27 @@ public class PdfMerge {
      */
     public static void merge(File folder)throws IOException{
         File[] files = folder.listFiles((dir, name) -> name.endsWith("pdf") && !name.equals("merged.pdf"));
+        assert files != null;
         List<File> fileList = Arrays.asList(files);
         mulFile2One(fileList,folder.getPath()+"/merged.pdf");
     }
-    public static void main(String[] args) throws IOException {
-        String pathname = "d:/tmp/fapiao/20230206";
-        merge(new File(pathname));
 
+    public static void main(String[] args) throws IOException {
+        File f = latestFile("d:/tmp/fapiao");
+        if (f != null) {
+            System.out.println(f);
+            merge(f);
+        }
+
+    }
+
+    public static File latestFile(String path) {
+        File directory = new File(path);
+        File[] subDirectories = directory.listFiles(File::isDirectory);
+        if (subDirectories != null) {
+            Arrays.sort(subDirectories, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
+            return subDirectories[0];
+        }
+        return null;
     }
 }
