@@ -42,7 +42,7 @@ public class PdfMerge {
     }
 
     public static void main(String[] args) throws IOException {
-        File f = latestFile("d:/tmp/fapiao");
+        File f = latestFile("c:/tmp/fapiao");
         if (f != null) {
             System.out.println(f);
             merge(f);
