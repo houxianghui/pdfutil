@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="1" status="ERROR" strict="true" name="LogConfig">
+    <properties>
+        <Property name="app.log.layout">[%d][%t][%p][%c] - %m%n</Property>
+        <Property name="trade.log.layout">[%p][%d][%t]%m%n</Property>
+        <Property name="dcn">${sys:dcn}</Property>
+        <Property name="systemId">${sys:systemId}</Property>
+        <Property name="artifactId">${sys:artifact.id}</Property>
+        <Property name="appHome">${env:APPHOME}</Property>
+    </properties>
+    <Appenders>
+        <Appender type="Console" name="STDOUT">
+            <Target>SYSTEM_OUT</Target>
+            <Layout type="PatternLayout" pattern="${app.log.layout}"/>
+        </Appender>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+
+        <Logger name="cn.webank" level="info"/>
+        <Logger name="com.allinfinance" level="info"/>
+        <Logger name="org.springframework.security" level="info"/>
+        <Logger name="trade" level="info">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+    </Loggers>
+</Configuration>

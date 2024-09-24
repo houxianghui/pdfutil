@@ -4,8 +4,6 @@ import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.Win32Exception;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
 /**
  * Unit test for simple App.
  */
@@ -15,7 +13,8 @@ public class AppTest {
      */
     @Test
     public void shouldAnswerWithTrue() {
-        assertTrue(true);
+        String[] result = "153,123".split(",");
+        System.out.println(result[0]);
     }
 
     @Test
@@ -29,5 +28,6 @@ public class AppTest {
             username = "<unknown>";
         }
         System.out.println("Current logged in user: " + username);
+        System.out.println("中国");
     }
 }
